@@ -26,25 +26,26 @@ import { IconContext } from 'react-icons';
 import { GrUpdate } from 'react-icons/gr';
 
 const Header = (props) => {
+    const { focus, trendings } = props;
 
-    const showSearchInfo = (show) => {
+    const createSearchInfoItems = (trendings) => {
+        return trendings.map((item) => {
+            return <SearchInfoItem key={item.get('tag')}>{item.get('tag')}</SearchInfoItem>
+        })
+    }
+
+    const showSearchInfo = (show, trendings) => {
         return show ? <SearchInfo>
             <SearchInfoTitle>
                 popular
                 <SearchInfoUpdate><GrUpdate /> change</SearchInfoUpdate>
             </SearchInfoTitle>
             <SearchInfoList>
-                <SearchInfoItem>technology</SearchInfoItem>
-                <SearchInfoItem>science</SearchInfoItem>
-                <SearchInfoItem>politics</SearchInfoItem>
-                <SearchInfoItem>sports</SearchInfoItem>
-                <SearchInfoItem>movies</SearchInfoItem>
-                <SearchInfoItem>entertainment</SearchInfoItem>
+                {createSearchInfoItems(trendings)}
             </SearchInfoList>
         </SearchInfo> : null;
     }
 
-    const { focus } = props;
     return (
         <Fragment>
             <HeaderWrapper>
@@ -67,7 +68,7 @@ const Header = (props) => {
                                 />
                             </CSSTransition>
                             <FiSearch className='searchicon' />
-                            {showSearchInfo(focus)}
+                            {showSearchInfo(focus, trendings)}
                         </SearchWrapper>
 
                         <Misc>
@@ -85,17 +86,19 @@ const Header = (props) => {
 const mapStateToProps = ({ header }) => {
     return {
         focus: header.get('focus'),
+        trendings: header.get('trendings')
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         handleFocus() {
+            dispatch(headerActions.fetchTrendings())
             dispatch(headerActions.focusSearchBox());
         },
         handleBlur() {
             dispatch(headerActions.defocusSearchBox());
-        }
+        },
     }
 };
 
