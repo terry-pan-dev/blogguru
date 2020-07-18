@@ -12,14 +12,37 @@ import {
     NavSearch,
     Misc,
     Button,
+    SearchInfo,
+    SearchInfoTitle,
+    SearchInfoUpdate,
+    SearchInfoItem,
+    SearchInfoList,
     SearchWrapper
 } from './style';
 import { FiHome, FiSearch } from 'react-icons/fi';
 import { FaMobileAlt } from 'react-icons/fa';
 import { BsPencilSquare } from 'react-icons/bs';
 import { IconContext } from 'react-icons';
+import { GrUpdate } from 'react-icons/gr';
 
 const Header = (props) => {
+
+    const showSearchInfo = (show) => {
+        return show ? <SearchInfo>
+            <SearchInfoTitle>
+                popular
+                <SearchInfoUpdate><GrUpdate /> change</SearchInfoUpdate>
+            </SearchInfoTitle>
+            <SearchInfoList>
+                <SearchInfoItem>technology</SearchInfoItem>
+                <SearchInfoItem>science</SearchInfoItem>
+                <SearchInfoItem>politics</SearchInfoItem>
+                <SearchInfoItem>sports</SearchInfoItem>
+                <SearchInfoItem>movies</SearchInfoItem>
+                <SearchInfoItem>entertainment</SearchInfoItem>
+            </SearchInfoList>
+        </SearchInfo> : null;
+    }
 
     const { focus } = props;
     return (
@@ -27,9 +50,9 @@ const Header = (props) => {
             <HeaderWrapper>
                 <Logo />
                 <Nav>
-                    <IconContext.Provider value={{ style: { verticalAlign: 'text-top' } }} >
-                        <NavItem className='left active'><FiHome />Home</NavItem>
-                        <NavItem className='left'><FaMobileAlt />Download</NavItem>
+                    <IconContext.Provider value={{ style: { verticalAlign: 'sub' } }} >
+                        <NavItem className='left active'><FiHome /> Home</NavItem>
+                        <NavItem className='left'><FaMobileAlt /> Download</NavItem>
                         <NavItem className='right'>Login</NavItem>
                         <SearchWrapper>
                             <CSSTransition
@@ -44,6 +67,7 @@ const Header = (props) => {
                                 />
                             </CSSTransition>
                             <FiSearch className='searchicon' />
+                            {showSearchInfo(focus)}
                         </SearchWrapper>
 
                         <Misc>
