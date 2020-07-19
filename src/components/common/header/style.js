@@ -117,6 +117,12 @@ export const SearchInfoUpdate = styled.span.attrs({
 })`
     float: right;
     font-size: 13px;
+    cursor: pointer;
+    .spin {
+        transition: all .2s ease-in;
+        transform: rotate(80deg);
+        transform-origin: center center;
+    }
 `
 
 export const SearchInfoList = styled.div.attrs({
@@ -138,6 +144,7 @@ export const SearchInfoItem = styled.a.attrs({
     float: left;
     margin-right: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
 `
 
 export const SearchInfoTitle = styled.div.attrs({

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import {
     headerActions
@@ -24,81 +24,112 @@ import { FaMobileAlt } from 'react-icons/fa';
 import { BsPencilSquare } from 'react-icons/bs';
 import { IconContext } from 'react-icons';
 import { GrUpdate } from 'react-icons/gr';
+import { NUM_OF_SEARCH_ITEMS } from '../../../store/reducers/header/actions';
+import { get } from 'immutable';
 
-const Header = (props) => {
-    const { focus, trendings } = props;
-
-    const createSearchInfoItems = (trendings) => {
-        return trendings.map((item) => {
-            return <SearchInfoItem key={item.get('tag')}>{item.get('tag')}</SearchInfoItem>
+class Header extends Component {
+    createSearchInfoItems = () => {
+        const { trendings, page } = this.props;
+        const itemList = [];
+        // eslint-disable-next-line no-undef
+        for (let index = page * NUM_OF_SEARCH_ITEMS; index < (page + 1) * NUM_OF_SEARCH_ITEMS; index++) {
+            if (index < trendings.size) {
+                itemList.push(get(trendings, index))
+            }
+        }
+        return itemList.map((item) => {
+            return <SearchInfoItem key={item}>{item}</SearchInfoItem>
         })
     }
 
-    const showSearchInfo = (show, trendings) => {
-        return show ? <SearchInfo>
+    showSearchInfo = () => {
+        const { focus, mouseIn, handleChangePage } = this.props;
+        return focus || mouseIn ? <SearchInfo
+            onMouseEnter={this.props.handleMonseEnter}
+            onMouseLeave={this.props.handleMouseLeave}
+        >
             <SearchInfoTitle>
-                popular
-                <SearchInfoUpdate><GrUpdate /> change</SearchInfoUpdate>
+                Popular
+                <SearchInfoUpdate
+                    onClick={() => handleChangePage()}
+                ><GrUpdate className="spin" /> Change</SearchInfoUpdate>
             </SearchInfoTitle>
             <SearchInfoList>
-                {createSearchInfoItems(trendings)}
+                {this.createSearchInfoItems()}
             </SearchInfoList>
         </SearchInfo> : null;
     }
 
-    return (
-        <Fragment>
-            <HeaderWrapper>
-                <Logo />
-                <Nav>
-                    <IconContext.Provider value={{ style: { verticalAlign: 'sub' } }} >
-                        <NavItem className='left active'><FiHome /> Home</NavItem>
-                        <NavItem className='left'><FaMobileAlt /> Download</NavItem>
-                        <NavItem className='right'>Login</NavItem>
-                        <SearchWrapper>
-                            <CSSTransition
-                                in={focus}
-                                timeout={200}
-                                classNames="expand"
-                            >
-                                <NavSearch
-                                    className={focus ? 'focused' : ''}
-                                    onFocus={props.handleFocus}
-                                    onBlur={props.handleBlur}
-                                />
-                            </CSSTransition>
-                            <FiSearch className='searchicon' />
-                            {showSearchInfo(focus, trendings)}
-                        </SearchWrapper>
+    render() {
+        const { focus, handleFocus, handleBlur, trendings } = this.props;
+        return (
+            <Fragment>
+                <HeaderWrapper>
+                    <Logo />
+                    <Nav>
+                        <IconContext.Provider value={{ style: { verticalAlign: 'sub' } }} >
+                            <NavItem className='left active'><FiHome /> Home</NavItem>
+                            <NavItem className='left'><FaMobileAlt /> Download</NavItem>
+                            <NavItem className='right'>Login</NavItem>
+                            <SearchWrapper>
+                                <CSSTransition
+                                    in={focus}
+                                    timeout={200}
+                                    classNames="expand"
+                                >
+                                    <NavSearch
+                                        className={focus ? 'focused' : ''}
+                                        onFocus={() => handleFocus(trendings)}
+                                        onBlur={handleBlur}
+                                    />
+                                </CSSTransition>
+                                <FiSearch className='searchicon' />
+                                {this.showSearchInfo()}
+                            </SearchWrapper>
 
-                        <Misc>
-                            <Button className='blog'><BsPencilSquare /> Blog</Button>
-                            <Button className='reg'>Sign up</Button>
-                        </Misc>
+                            <Misc>
+                                <Button className='blog'><BsPencilSquare /> Blog</Button>
+                                <Button className='reg'>Sign up</Button>
+                            </Misc>
 
-                    </IconContext.Provider>
-                </Nav>
-            </HeaderWrapper>
-        </Fragment>
-    )
+                        </IconContext.Provider>
+                    </Nav>
+                </HeaderWrapper>
+            </Fragment>
+        )
+
+    }
 }
 
 const mapStateToProps = ({ header }) => {
     return {
         focus: header.get('focus'),
-        trendings: header.get('trendings')
+        trendings: header.get('trendings'),
+        page: header.get('page'),
+        mouseIn: header.get('mouseIn')
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleFocus() {
-            dispatch(headerActions.fetchTrendings())
-            dispatch(headerActions.focusSearchBox());
+        handleFocus(trendings) {
+            (trendings.size === 0) &&
+                dispatch(headerActions.fetchTrendings())
+            dispatch(headerActions.toggleSearchBoxFocus());
         },
         handleBlur() {
-            dispatch(headerActions.defocusSearchBox());
+            dispatch(headerActions.toggleSearchBoxFocus());
         },
+        handleMonseEnter() {
+            dispatch(headerActions.toggleMouseInOut());
+        },
+        handleMouseLeave() {
+            dispatch(headerActions.toggleMouseInOut());
+        },
+        handleChangePage() {
+            dispatch(headerActions.rotatePage());
+        }
+
     }
 };
 

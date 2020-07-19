@@ -4,7 +4,8 @@ import { fromJS } from 'immutable';
 import {
     GET_TRENDINGS,
     GET_TRENDINGS_SUCCESS,
-    GET_TRENDINGS_FAIL
+    GET_TRENDINGS_FAIL,
+    NUM_OF_SEARCH_ITEMS
 } from '../../reducers/header/actions';
 
 function* fetchTrendings() {
@@ -12,7 +13,8 @@ function* fetchTrendings() {
         const res = yield axios.get('api/trendings');
         yield put({
             type: GET_TRENDINGS_SUCCESS,
-            value: fromJS(res.data.trendings)
+            value: fromJS(res.data),
+            totalPage: Math.ceil(res.data.length / NUM_OF_SEARCH_ITEMS)
         });
     } catch (error) {
         yield put({

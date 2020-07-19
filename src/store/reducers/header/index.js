@@ -1,18 +1,35 @@
-import { DEFOCUS_SEARCH_BOX, FOCUS_SEARCH_BOX, GET_TRENDINGS_SUCCESS } from "./actions";
-import { fromJS, set } from 'immutable';
+import {
+    TOGGLE_SEARCH_BOX_FOCUS,
+    GET_TRENDINGS_SUCCESS,
+    TOGGLE_MOUSE_IN_OUT,
+    ROTATE_PAGE
+} from "./actions";
+import { fromJS } from 'immutable';
 const defaultState = fromJS({
     focus: false,
-    trendings: []
+    mouseIn: false,
+    trendings: [],
+    page: 0,
+    totalPage: 1,
 });
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case FOCUS_SEARCH_BOX:
-            return set(state, 'focus', true);
-        case DEFOCUS_SEARCH_BOX:
-            return set(state, 'focus', false);
+        case TOGGLE_SEARCH_BOX_FOCUS:
+            return state.set('focus', !state.get('focus'));
         case GET_TRENDINGS_SUCCESS:
-            return set(state, 'trendings', action.value);
+            return state.merge({
+                'trendings': action.value,
+                'totalPage': action.totalPage
+            });
+        case TOGGLE_MOUSE_IN_OUT:
+            return state.set('mouseIn', !state.get('mouseIn'));
+        case ROTATE_PAGE:
+            let newPage = state.get('page') + 1;
+            if (newPage > state.get('totalPage')) {
+                newPage = 0;
+            }
+            return state.set('page', newPage % state.get('totalPage'));
         default:
             return state;
     }

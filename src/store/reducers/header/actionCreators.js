@@ -1,16 +1,22 @@
 import {
-    DEFOCUS_SEARCH_BOX,
-    FOCUS_SEARCH_BOX,
-    GET_TRENDINGS
+    TOGGLE_SEARCH_BOX_FOCUS,
+    GET_TRENDINGS,
+    ROTATE_PAGE,
+    TOGGLE_MOUSE_IN_OUT
 } from "./actions";
-export const focusSearchBox = () => ({
-    type: FOCUS_SEARCH_BOX
+export const toggleSearchBoxFocus = () => ({
+    type: TOGGLE_SEARCH_BOX_FOCUS
 });
 
 export const fetchTrendings = () => ({
     type: GET_TRENDINGS
 })
 
-export const defocusSearchBox = () => ({
-    type: DEFOCUS_SEARCH_BOX
+export const rotatePage = () => ({
+    type: ROTATE_PAGE
+})
+
+
+export const toggleMouseInOut = () => ({
+    type: TOGGLE_MOUSE_IN_OUT
 })
