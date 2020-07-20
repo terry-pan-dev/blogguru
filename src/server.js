@@ -1,11 +1,12 @@
-import { Server } from "miragejs"
+import { Server, Response } from "miragejs"
 
 const topics = [
     { title: 'Protest', url: 'https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F1e8f8a4b-650e-4299-876e-12b4cb63b1cb.jpg?fit=scale-down&source=next&width=700' },
     { title: 'COVID-19', url: 'https://www.hep.org.au/wp-content/uploads/2020/03/COVID-19.jpg' },
     { title: 'Biology', url: 'https://image.freepik.com/free-vector/abstract-background-with-cells-viruses-biology-medical-science-virus-cell-scientific-medical-molecule-technology-biotechnology_53562-5281.jpg' },
     { title: 'Machine learning', url: 'https://i0.wp.com/blogs.cfainstitute.org/investor/files/2018/01/Artificial-Intelligence-Machine-Learning-and-Deep-Learning-A-Primer.png?resize=940%2C575&ssl=1' },
-    { title: 'Iphone', url: 'https://assets.kogan.com/files/product/etail/Apple-/KHIP1164BLK_1.jpg?auto=webp&canvas=753%2C502&fit=bounds&height=502&quality=75&width=753' }
+    { title: 'Iphone', url: 'https://www.pocket-lint.com/r/s/660x/assets/images/149324-phones-review-review-iphone-11-pro-max-review-product-shots-image1-keant0hfcg-jpg.webp' },
+    { title: 'Nueral network', url: 'https://www.photonicsviews.com/wp-content/uploads/2019/09/190905b_PhV-R_OpticalNetwork_OSA_540.jpg' }
 ]
 
 const sources = [
@@ -247,6 +248,13 @@ const recommends = [
     { topic: 'hotest series', url: '' },
     { topic: 'hotest authors', url: '' }
 ]
+
+const popular_posts = [
+    { id: 1, title: 'Teachers: You Are Being Gaslit', author: 'Michele Merritt, Ph.D. in Digital Diplomacy', date: 'Jul 13' },
+    { id: 2, title: '7 Quotes By The Dalai Lama That Will Change Your Mind', author: 'Sinem Günel in Mind Cafe', date: 'Jun 16' },
+    { id: 3, title: '“We Don’t View You as Americans. That’s the Bottom Line”', author: 'Aaron Gell in GEN', date: 'Jul 16' },
+    { id: 4, title: 'Austin Was Destined to Replace Silicon Valley. Then the Pandemic Hit', author: 'Adam Bluestein in Marker', date: 'Jul 15' },
+]
 export function makeServer({ environment = "test" } = {}) {
     let server = new Server({
         environment,
@@ -262,12 +270,20 @@ export function makeServer({ environment = "test" } = {}) {
                 return topics;
             });
 
-            // this.get('/articles', () => {
-            //     return articles;
-            // });
+            this.get('/articles', (db, request) => {
+                const { limit, offset } = request.queryParams;
+                if (offset > articles.length) {
+                    return new Response(404, { errors: ['no more data'] });
+                }
+                return articles.slice(offset, offset + limit);
+            });
 
             this.get('/recommendations', () => {
                 return recommends;
+            })
+
+            this.get('/populars', () => {
+                return popular_posts;
             })
 
         },

@@ -11,11 +11,12 @@ import { connect } from "react-redux";
 import List from "./list";
 import Recommendation from "./recommendation";
 import Topic from "./topic";
-import Author from "./author";
+import HotPost from "./hot_articles";
 
 import {
     fetchArticleList,
-    fetchTopics
+    fetchTopics,
+    fetchHotArticleList,
 } from '../../../store/reducers/home'
 
 
@@ -33,7 +34,7 @@ class Home extends React.Component {
                 </LeftPane>
                 <RightPane>
                     <Recommendation />
-                    <Author />
+                    <HotPost />
                 </RightPane>
             </HomeWrapper>
         )
@@ -41,9 +42,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = () => {
-    return {
-
-    }
+    return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -51,6 +50,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchPageContents() {
             dispatch(fetchTopics());
             dispatch(fetchArticleList());
+            dispatch(fetchHotArticleList());
         }
     }
 }

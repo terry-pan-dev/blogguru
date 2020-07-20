@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import logo from '../../../static/logo.png';
 
 const headerHeight = '56px';
-const headerColor = '#1761A0';
+const headerColor = '#080857';
 export const HeaderWrapper = styled.div`
     position: relative;
     height: ${headerHeight};
@@ -15,12 +15,12 @@ export const Logo = styled.a.attrs({
     position: absolute;
     top: 0;
     left: 0;
-    width: 124px;
+    width: 167px;
     display: block;
     height: ${headerHeight};
     background: url(${logo});
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     margin-left: 50px;
 `
 

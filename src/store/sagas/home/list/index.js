@@ -7,16 +7,26 @@ import {
     FETCH_ARTICLE_LIST
 } from '../../../reducers/home/list/actions';
 
-function* fetchArticleList() {
+let isError = false;
+function* fetchArticleList({ offset }) {
     try {
-        const res = yield axios.get('api/articles');
-        yield put({
-            type: FETCH_ARTICLE_LIST_SUCCESS,
-            value: fromJS(res.data),
-        });
+        if (!isError) {
+            const res = yield axios.get('api/articles', {
+                params: {
+                    limit: 10,
+                    offset: offset
+                }
+            });
+            yield put({
+                type: FETCH_ARTICLE_LIST_SUCCESS,
+                value: fromJS(res.data),
+            });
+        }
     } catch (error) {
+        isError = true;
         yield put({
-            type: FETCH_ARTICLE_LIST_FAIL
+            type: FETCH_ARTICLE_LIST_FAIL,
+            error: error
         })
     }
 }

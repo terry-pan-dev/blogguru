@@ -5,6 +5,7 @@ export const RecommendWrapper = styled.div.attrs({
 })`
     margin-top: 30px;
     height: 100%;
+    cursor: pointer;
     .weekly {
         background: #F2BB57;
     }

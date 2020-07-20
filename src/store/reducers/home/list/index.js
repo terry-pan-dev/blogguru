@@ -1,4 +1,4 @@
-import { FETCH_ARTICLE_LIST_SUCCESS } from "./actions";
+import { FETCH_ARTICLE_LIST_SUCCESS, FETCH_ARTICLE_LIST_FAIL } from "./actions";
 import { fromJS } from "immutable";
 
 const defaultState = fromJS({
@@ -7,7 +7,10 @@ const defaultState = fromJS({
 export default (state = defaultState, action) => {
     switch (action.type) {
         case FETCH_ARTICLE_LIST_SUCCESS:
-            return state.set('articles', action.value);
+            return state.update('articles', articles => articles.push(...action.value));
+        case FETCH_ARTICLE_LIST_FAIL:
+            console.log(action.error)
+            return state;
         default:
             return state;
     }
