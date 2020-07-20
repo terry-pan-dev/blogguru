@@ -29,6 +29,6 @@ export const Banner = styled.div.attrs({
 export const RightPane = styled.div.attrs({
 
 })`
-    width: 240px;
+    width: 280px;
     float: right;
 `

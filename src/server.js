@@ -240,6 +240,13 @@ const trendings = [
     "blockchain",
     "travel"
 ]
+
+const recommends = [
+    { topic: 'weekly trendings', url: '' },
+    { topic: 'monthly trendings', url: '' },
+    { topic: 'hotest series', url: '' },
+    { topic: 'hotest authors', url: '' }
+]
 export function makeServer({ environment = "test" } = {}) {
     let server = new Server({
         environment,
@@ -255,9 +262,14 @@ export function makeServer({ environment = "test" } = {}) {
                 return topics;
             });
 
-            this.get('/articles', () => {
-                return articles;
+            // this.get('/articles', () => {
+            //     return articles;
+            // });
+
+            this.get('/recommendations', () => {
+                return recommends;
             })
+
         },
     })
 
