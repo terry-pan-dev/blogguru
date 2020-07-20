@@ -17,3 +17,4 @@ Blogguru is a blog writing platform purely built by using Reactjs.
 - sign up
 - blog detail
 - writing blog
+- go back to top

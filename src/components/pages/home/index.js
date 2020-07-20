@@ -3,7 +3,8 @@ import {
     HomeWrapper,
     LeftPane,
     RightPane,
-    Banner
+    Banner,
+    GoTop,
 } from "./style";
 
 import { connect } from "react-redux";
@@ -21,8 +22,35 @@ import {
 
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showScroll: false,
+        }
+    }
+
+    bindWindowScrollEvent = () => {
+        window.addEventListener('scroll', this.showScrollTop);
+    }
+
+    showScrollTop = (e) => {
+        const isShow = document.documentElement.scrollTop > 200 ? true : false;
+        this.setState(() => ({
+            showScroll: isShow,
+        }))
+    }
+
+    handleScrollTop = () => {
+        window.scroll(0, 0);
+    }
+
     componentDidMount() {
         this.props.fetchPageContents();
+        this.bindWindowScrollEvent();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.showScrollTop);
     }
     render() {
         return (
@@ -36,6 +64,7 @@ class Home extends React.Component {
                     <Recommendation />
                     <HotPost />
                 </RightPane>
+                {this.state.showScroll ? <GoTop onClick={this.handleScrollTop}>⌃</GoTop> : null}
             </HomeWrapper>
         )
     }

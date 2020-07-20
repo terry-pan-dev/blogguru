@@ -32,3 +32,19 @@ export const RightPane = styled.div.attrs({
     width: 280px;
     float: right;
 `
+
+export const GoTop = styled.div.attrs({
+
+})`
+    position: fixed;
+    bottom: 50px;
+    right: 150px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border: 1px solid #eee;
+    font-size: 2.2em;
+    color: #ccc;
+    cursor: pointer;
+`
