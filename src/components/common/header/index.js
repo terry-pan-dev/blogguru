@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import {
     headerActions
@@ -27,7 +27,7 @@ import { GrUpdate } from 'react-icons/gr';
 import { NUM_OF_SEARCH_ITEMS } from '../../../store/reducers/header/actions';
 import { get } from 'immutable';
 
-class Header extends Component {
+class Header extends React.PureComponent {
     createSearchInfoItems = () => {
         const { trendings, page } = this.props;
         const itemList = [];

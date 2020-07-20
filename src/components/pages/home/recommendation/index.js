@@ -5,7 +5,7 @@ import {
     RecommendItem
 } from './style'
 
-class Recommendation extends React.Component {
+class Recommendation extends React.PureComponent {
     render() {
         return (
             <RecommendWrapper>

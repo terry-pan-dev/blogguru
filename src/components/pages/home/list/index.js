@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment } from "react";
 import { connect } from 'react-redux';
 import {
     ListWrapper,
@@ -12,7 +12,7 @@ import {
 } from '../../../../store/reducers/home'
 
 
-class List extends Component {
+class List extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
