@@ -12,11 +12,16 @@ import List from "./list";
 import Recommendation from "./recommendation";
 import Topic from "./topic";
 import Author from "./author";
-import { fetchTopics } from "../../../store/reducers/home/topic/actionCreators";
+
+import {
+    fetchArticleList,
+    fetchTopics
+} from '../../../store/reducers/home'
+
 
 class Home extends React.Component {
     componentDidMount() {
-        this.props.getTopics();
+        this.props.fetchPageContents();
     }
     render() {
         return (
@@ -43,8 +48,9 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getTopics() {
+        fetchPageContents() {
             dispatch(fetchTopics());
+            dispatch(fetchArticleList());
         }
     }
 }
