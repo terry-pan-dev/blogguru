@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import {
   Home,
-  Post
+  Post,
+  Login,
 } from "./components/pages";
 
 
@@ -16,6 +17,7 @@ function App() {
         <Header />
         <Route path='/' exact component={Home} />
         <Route path='/detail/:id' exact component={Post} />
+        <Route path='/login' exact component={Login} />
       </BrowserRouter>
     </Provider>
   );

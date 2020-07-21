@@ -75,7 +75,9 @@ class Header extends React.PureComponent {
                                 <NavItem className='left active'><FiHome /> Home</NavItem>
                             </Link>
                             <NavItem className='left'><FaMobileAlt /> Download</NavItem>
-                            <NavItem className='right'>Login</NavItem>
+                            <Link to='/login'>
+                                <NavItem className='right'>Login</NavItem>
+                            </Link>
                             <SearchWrapper>
                                 <CSSTransition
                                     in={focus}
