@@ -107,17 +107,18 @@ export const ImageBanner = styled.img.attrs({
 
 })`
     position: absolute;
-    top: 300px;
+    top: ${props => props.totop + 80 + 'px'};
     left: 0px;
     right: 0px;
     height: auto;
     width: 100%;
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
 `
 
 export const ContentWrapper = styled.div.attrs({
 
 })`
     position: relative;
-    margin-top: ${props => props.margintop + "px"}
+    margin-top: ${props => props.margintop + 50 + "px"}
 `

@@ -43,10 +43,10 @@ class List extends React.PureComponent {
     constructList = () => {
         const { articles } = this.props;
         const totalArticles = articles.size - 1;
-        return articles.map((article, index) => {
+        return articles.map((article, i) => {
             return (
-                <Link key={article.get('title')} to='/detail'>
-                    <ListWrapper ref={totalArticles === index ? (li) => { this.li = li } : ''} >
+                <Link key={article.get('title')} to={{ pathname: '/detail/' + article.get('id'), state: { index: i } }} >
+                    <ListWrapper ref={totalArticles === i ? (li) => { this.li = li } : ''} >
                         <ListContent>
                             <div className='source'>{article.get('source')}</div>
                             <div className='title'>{article.get('title')}</div>

@@ -204,6 +204,91 @@ const ids = [
     24,
     25
 ]
+
+const bannerImages = [
+    'https://image.freepik.com/free-vector/abstract-technology-network-mesh-concept-banner-background-design_1017-22590.jpg',
+    'https://www.publicdomainpictures.net/pictures/170000/velka/banner-header-tapete-1463483351bhS.jpg',
+    'https://www.flowerstoreinabox.com.au/images/products/large/117.jpg',
+    null,
+    'https://uploads.prod01.sydney.platformos.com/instances/157/assets/images/content-type-covid-19.png?updated=1587432499',
+    null,
+    'https://www.puttinghealthatthetop.com/wp-content/uploads/2018/05/banner.jpg',
+    'https://wowslider.com/sliders/demo-40/data1/images/cherry_blossom.jpg',
+    'https://www.mellanox.com/sites/default/files/homepage/img/homepage-tls-banner.jpg',
+    'https://i.pinimg.com/originals/83/a9/4b/83a94bb7d6740a4e336e676518d1ccda.jpg',
+    null,
+    null,
+    'https://media.istockphoto.com/vectors/valentines-day-banner-romantic-design-with-realistic-festive-objects-vector-id1197178173',
+    'https://cdn2.f-cdn.com/contestentries/1045664/20988156/5940f7573fe72_thumb900.jpg',
+    null,
+    null,
+    'https://nrw.reconciliation.org.au/wp-content/uploads/2020/04/NRW2020-Banner-WEB-LR.jpg',
+    'https://cdn2.f-cdn.com/contestentries/1045664/20988156/5940f7573fe72_thumb900.jpg',
+    'https://www.s-tech.com.au/wp-content/uploads/2016/01/S-Tech-Flood-Lights-Kwinana-Rec-Banner-1500x8191-11.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSrXSk94pmdHgWaXXtu9NHkkj-Sxje07oVh2A&usqp=CAU',
+    null,
+    null,
+    null,
+    '',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQHYkXwRN7_lIlmfBNM52j_5Mv5yVdPZQK_Yg&usqp=CAU',
+    'https://images.squarespace-cdn.com/content/v1/5ee16e4e30092916dfd45118/1592266085231-J0FFVTGYRSUVUIDYKLVQ/ke17ZwdGBToddI8pDm48kDcCuKOPwKNZUkq5WKdlfb8UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dor9AuGrYK6YfUWWkPoijWVwTw3yXdY22TBfM8dyBFjpH3bqxw7fF48mhrq5Ulr0Hg/Home-Core+Content-Banner.jpg?format=2500w'
+]
+
+const contents = [
+    '<h1>hello world</h1>',
+    '<h1>hello world</h1>',
+    '<h1>hello world</h1>',
+    '<h1>hello world</h1>',
+    '<h1>hello world</h1>',
+    '<h1>hello world</h1>',
+    '<h1>hello world</h1>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+    '<p>hello world</p>',
+]
+
+const avatars = [
+    'https://miro.medium.com/fit/c/96/96/0*lI5-avJvcBbQDmA2.jpeg',
+    'https://miro.medium.com/fit/c/96/96/2*CTMyti-Mw6FQWKhBKp7rEA.jpeg',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+    'https://www.w3schools.com/howto/img_avatar.png',
+]
 const articles = ids.map((_id, index) => {
     return {
         id: _id,
@@ -212,7 +297,10 @@ const articles = ids.map((_id, index) => {
         subtitle: subtitles[index],
         author: authors[index],
         date: dates[index],
-        url: urls[index]
+        url: urls[index],
+        bannerImage: bannerImages[index],
+        avatar: avatars[index],
+        content: contents[index],
     }
 });
 

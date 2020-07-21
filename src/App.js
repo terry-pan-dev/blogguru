@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Route path='/' exact component={Home} />
-        <Route path='/detail' exact component={Post} />
+        <Route path='/detail/:id' exact component={Post} />
       </BrowserRouter>
     </Provider>
   );

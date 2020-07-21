@@ -6,6 +6,7 @@ Blogguru is a blog writing platform purely built by using Reactjs.
 - react
 - react-redux
 - react-router-dom
+- immutablejs
 - react-sagas (async call)
 - styled-components (UI library)
 - react-transition-group (animation)
