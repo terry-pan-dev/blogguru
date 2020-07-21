@@ -1,6 +1,6 @@
 import Home from './home';
-import Detail from './detail';
+import Post from './post';
 export {
     Home,
-    Detail
+    Post
 }

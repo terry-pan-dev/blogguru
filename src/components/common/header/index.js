@@ -26,6 +26,7 @@ import { IconContext } from 'react-icons';
 import { GrUpdate } from 'react-icons/gr';
 import { NUM_OF_SEARCH_ITEMS } from '../../../store/reducers/header/actions';
 import { get } from 'immutable';
+import { Link } from "react-router-dom";
 
 class Header extends React.PureComponent {
     createSearchInfoItems = () => {
@@ -65,10 +66,14 @@ class Header extends React.PureComponent {
         return (
             <Fragment>
                 <HeaderWrapper>
-                    <Logo />
+                    <Link to='/'>
+                        <Logo />
+                    </Link>
                     <Nav>
                         <IconContext.Provider value={{ style: { verticalAlign: 'sub' } }} >
-                            <NavItem className='left active'><FiHome /> Home</NavItem>
+                            <Link to='/'>
+                                <NavItem className='left active'><FiHome /> Home</NavItem>
+                            </Link>
                             <NavItem className='left'><FaMobileAlt /> Download</NavItem>
                             <NavItem className='right'>Login</NavItem>
                             <SearchWrapper>

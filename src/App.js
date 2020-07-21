@@ -1,24 +1,22 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Header from './components/common/header';
 import store from './store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import {
   Home,
-  Detail
+  Post
 } from "./components/pages";
 
 
 function App() {
   return (
     <Provider store={store}>
-      <Fragment>
+      <BrowserRouter>
         <Header />
-        <BrowserRouter>
-          <Route path='/' exact component={Home} />
-          <Route path='/detail' exact component={Detail} />
-        </BrowserRouter>
-      </Fragment>
+        <Route path='/' exact component={Home} />
+        <Route path='/detail' exact component={Post} />
+      </BrowserRouter>
     </Provider>
   );
 }

@@ -45,8 +45,10 @@ class Home extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.props.fetchPageContents();
-        this.bindWindowScrollEvent();
+        if (this.props.articles.size === 0) {
+            this.props.fetchPageContents();
+            this.bindWindowScrollEvent();
+        }
     }
 
     componentWillUnmount() {
@@ -70,8 +72,10 @@ class Home extends React.PureComponent {
     }
 }
 
-const mapStateToProps = () => {
-    return {}
+const mapStateToProps = ({ home }) => {
+    return {
+        articles: home.article.get('articles')
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

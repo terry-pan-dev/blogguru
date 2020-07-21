@@ -11,6 +11,7 @@ import {
     fetchArticleList,
 } from '../../../../store/reducers/home'
 
+import { Link } from "react-router-dom";
 
 class List extends React.PureComponent {
     constructor(props) {
@@ -22,13 +23,15 @@ class List extends React.PureComponent {
 
     handleScroll = () => {
         const articleLength = this.props.articles.size;
-        var lastLiOffset = this.li.offsetTop + this.li.clientHeight;
-        var pageOffset = window.pageYOffset + window.innerHeight;
-        if (pageOffset > lastLiOffset) {
-            this.setState((prevState) => ({
-                totalList: articleLength + prevState.totalList,
-            }))
-            this.props.loadMore(this.state.totalList + 1);
+        if (this.li) {
+            var lastLiOffset = this.li.offsetTop + this.li.clientHeight;
+            var pageOffset = window.pageYOffset + window.innerHeight;
+            if (pageOffset > lastLiOffset) {
+                this.setState((prevState) => ({
+                    totalList: articleLength + prevState.totalList,
+                }))
+                this.props.loadMore(this.state.totalList + 1);
+            }
         }
     };
 
@@ -42,28 +45,30 @@ class List extends React.PureComponent {
         const totalArticles = articles.size - 1;
         return articles.map((article, index) => {
             return (
-                <ListWrapper key={article.get('id')} ref={totalArticles === index ? (li) => { this.li = li } : ''} >
-                    <ListContent>
-                        <div className='source'>{article.get('source')}</div>
-                        <div className='title'>{article.get('title')}</div>
-                        <div className='subtitle'>{article.get('subtitle')}</div>
-                        <div className='content'>
-                            <div className='content-left'>
-                                <div className='author'>{article.get('author')}</div>
-                                <div className='date'>{article.get('date')}</div>
+                <Link key={article.get('title')} to='/detail'>
+                    <ListWrapper ref={totalArticles === index ? (li) => { this.li = li } : ''} >
+                        <ListContent>
+                            <div className='source'>{article.get('source')}</div>
+                            <div className='title'>{article.get('title')}</div>
+                            <div className='subtitle'>{article.get('subtitle')}</div>
+                            <div className='content'>
+                                <div className='content-left'>
+                                    <div className='author'>{article.get('author')}</div>
+                                    <div className='date'>{article.get('date')}</div>
+                                </div>
+                                <div className='content-right'>
+                                    <div className='more'><FiMoreVertical /></div>
+                                    <div className='bookmark'><BsBookmark /></div>
+                                </div>
                             </div>
-                            <div className='content-right'>
-                                <div className='more'><FiMoreVertical /></div>
-                                <div className='bookmark'><BsBookmark /></div>
-                            </div>
-                        </div>
-                    </ListContent>
-                    <img
-                        className="list-img"
-                        src={article.get('url')}
-                        alt={article.get('title')}
-                    />
-                </ListWrapper>
+                        </ListContent>
+                        <img
+                            className="list-img"
+                            src={article.get('url')}
+                            alt={article.get('title')}
+                        />
+                    </ListWrapper>
+                </Link>
             )
         })
     }
