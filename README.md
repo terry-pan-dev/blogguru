@@ -1,6 +1,16 @@
 ## Blogguru
 
-Blogguru is a blog writing platform purely built by using Reactjs.
+Blogguru is a blog sharing platform purely built by using Reactjs. Here are several screenshots for this blog system
+
+Home page
+![Screen Shot 2020-07-22 at 11.54.09 PM](https://i.imgur.com/SqhDWhx.png)
+
+Detail page
+![Screen Shot 2020-07-22 at 11.54.21 PM](https://i.imgur.com/3mleGXY.jpg)
+
+Login page
+![Screen Shot 2020-07-22 at 11.53.57 PM](https://i.imgur.com/XF4WLSU.png)
+
 
 ### Tech stack
 - react
