@@ -3,6 +3,7 @@ import watchFetchTrendings from './header';
 import watchFetchTopics from "./home/topic";
 import watchFetchArticleList from './home/list';
 import watchFetchHotArticleList from './home/hot_articles';
+import watchSendLoginForm from "./home/login";
 
 function* sagas() {
     yield all([
@@ -10,6 +11,7 @@ function* sagas() {
         watchFetchTopics(),
         watchFetchArticleList(),
         watchFetchHotArticleList(),
+        watchSendLoginForm()
     ])
 }
 

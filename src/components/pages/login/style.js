@@ -32,9 +32,13 @@ export const InputWrapper = styled.div.attrs({
     background: hsl(0deg 0% 71% / 10%);
     position: relative;
     .input {
+        position: absolute;
         float: left;
+        right: 10px;
+        left: 50px;
     }
     input {
+        width: 100%;
         height: 42px;
         outline: none;
         border: none;

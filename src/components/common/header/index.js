@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import {
-    headerActions
+    headerActions,
+    loginActions
 } from '../../../store/reducers';
 import { connect } from 'react-redux';
 import {
@@ -62,7 +63,7 @@ class Header extends React.PureComponent {
     }
 
     render() {
-        const { focus, handleFocus, handleBlur, trendings } = this.props;
+        const { focus, handleFocus, handleBlur, trendings, login, logmeout } = this.props;
         return (
             <Fragment>
                 <HeaderWrapper>
@@ -75,9 +76,13 @@ class Header extends React.PureComponent {
                                 <NavItem className='left active'><FiHome /> Home</NavItem>
                             </Link>
                             <NavItem className='left'><FaMobileAlt /> Download</NavItem>
-                            <Link to='/login'>
-                                <NavItem className='right'>Login</NavItem>
-                            </Link>
+                            {
+                                !login ? <Link to='/login'>
+                                    <NavItem className='right'>Login</NavItem>
+                                </Link> : <Link to='/'>
+                                        <NavItem onClick={logmeout} className='right'>Logout</NavItem>
+                                    </Link>
+                            }
                             <SearchWrapper>
                                 <CSSTransition
                                     in={focus}
@@ -108,12 +113,13 @@ class Header extends React.PureComponent {
     }
 }
 
-const mapStateToProps = ({ header }) => {
+const mapStateToProps = ({ header, login }) => {
     return {
         focus: header.get('focus'),
         trendings: header.get('trendings'),
         page: header.get('page'),
-        mouseIn: header.get('mouseIn')
+        mouseIn: header.get('mouseIn'),
+        login: login.get('login')
     }
 }
 
@@ -135,8 +141,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleChangePage() {
             dispatch(headerActions.rotatePage());
+        },
+        logmeout() {
+            dispatch(loginActions.logout());
         }
-
     }
 };
 

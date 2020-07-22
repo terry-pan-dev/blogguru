@@ -343,6 +343,10 @@ const popular_posts = [
     { id: 3, title: '“We Don’t View You as Americans. That’s the Bottom Line”', author: 'Aaron Gell in GEN', date: 'Jul 16' },
     { id: 4, title: 'Austin Was Destined to Replace Silicon Valley. Then the Pandemic Hit', author: 'Adam Bluestein in Marker', date: 'Jul 15' },
 ]
+
+let users = [
+    { account: 'pantaotao@icloud.com', password: '123456' }
+]
 export function makeServer({ environment = "test" } = {}) {
     let server = new Server({
         environment,
@@ -372,6 +376,21 @@ export function makeServer({ environment = "test" } = {}) {
 
             this.get('/populars', () => {
                 return popular_posts;
+            })
+
+            this.post('/users', (db, request) => {
+                let payload = JSON.parse(request.requestBody);
+                let { account, password } = payload;
+                let user = users.filter((user) => { return user.account === account && user.password === password });
+                if (user.length > 0) {
+                    return {
+                        status: 200
+                    }
+                } else {
+                    return {
+                        status: 403
+                    }
+                }
             })
 
         },

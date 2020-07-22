@@ -9,7 +9,6 @@ export default (state = defaultState, action) => {
         case FETCH_ARTICLE_LIST_SUCCESS:
             return state.update('articles', articles => articles.push(...action.value));
         case FETCH_ARTICLE_LIST_FAIL:
-            console.log(action.error)
             return state;
         default:
             return state;
